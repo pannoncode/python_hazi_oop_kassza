@@ -1,8 +1,9 @@
-stock_dummy = [
-    {"product_name": "kenyér", "price": 400, "quantity": 3},
-    {"product_name": "tej", "price": 500, "quantity": 3},
-    {"product_name": "csoki", "price": 200, "quantity": 7}
-]
+# stock_dummy = [
+#     {"product_name": "kenyér", "price": 400, "quantity": 3},
+#     {"product_name": "tej", "price": 500, "quantity": 3},
+#     {"product_name": "csoki", "price": 200, "quantity": 7}
+# ]
+from utils.db_handler import StockHandler
 
 
 class Product:
@@ -30,10 +31,10 @@ class Stock:
     Hozzáadja a létrehozott terméket a stock_dummy-hoz
     """
 
-    def __init__(self, product, complet_set=list):
+    def __init__(self, product):
         self.product = product
-        self.complet_set = complet_set
         self.stock = self.add_product_to_stock()
 
     def add_product_to_stock(self):
-        self.complet_set.append(self.product)
+        prod = StockHandler(self.product).insert_data()
+        return prod
